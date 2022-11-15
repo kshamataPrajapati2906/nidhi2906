@@ -1,0 +1,215 @@
+
+Slip 12
+
+1)
+Create a web application to demonstrate use of HtmlEditorExtender 
+Ajax control.
+
+Code
+
+1)
+Webform.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm15.aspx.cs" Inherits="slip1.WebForm15" %>
+
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="ajaxToolkit" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ScriptManager ID="ScriptManager1" runat="server">
+            </asp:ScriptManager>
+            <asp:TextBox ID="TextBox1" runat="server" Height="239px" TextMode="MultiLine" Width="377px"></asp:TextBox>
+            <ajaxToolkit:HtmlEditorExtender EnableSanitization="false" ID="TextBox1_HtmlEditorExtender" runat="server" BehaviorID="TextBox1_HtmlEditorExtender" TargetControlID="TextBox1">
+            </ajaxToolkit:HtmlEditorExtender>
+        </div>
+    </form>
+</body>
+</html>
+
+Op
+
+2) Create a web application to demonstrate use of Master Page with 
+applying Styles and Themes for page beautification.
+
+Code
+
+
+Webform5.aspx
+<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.master" CodeBehind="WebForm5.aspx.cs" Inherits="practical5.WebForm5" %>
+
+
+            <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+</asp:Content>
+
+       
+Site1.master
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="practical5.Site1" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Master Page Demo</title>
+    <link href="css/my.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            position: absolute;
+            top: 373px;
+            left: 1028px;
+            bottom: 303px;
+        }
+
+        .auto-style2 {
+            position: absolute;
+            top: 537px;
+            left: 1016px;
+            z-index: 1;
+        }
+
+        .style1 {
+            width: 446px;
+            height: 216px;
+        }
+
+        .style2 {
+            width: 190px;
+            height: 216px;
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+
+    <form id="form1" runat="server">
+        <style type="text/css">
+        body {
+}
+#div {
+    background-color: Aqua;
+}
+
+#header {
+    color: blueviolet;
+    text-align: center;
+    font-size: 20px;
+}
+
+#nav {
+    background-color: darkseagreen;
+    padding: 5px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li a {
+    color: crimson;
+    font-size: 30px;
+    column-width: 5px;
+}
+
+li {
+    display: inline;
+    padding-left: 2px;
+    column-width: 20px;
+}
+
+a {
+    text-decoration: none;
+    margin-left: 20px
+}
+
+li a:hover {
+    background-color: aqua;
+    color: coral;
+    padding: 1%;
+}
+
+#side {
+    text-align: center;
+    float: right;
+    width: 15%;
+    padding-bottom: 79%;
+    background-color: #F1FAEE;
+}
+
+#article {
+    background-color: burlywood;
+    padding: 10px;
+    padding-bottom: 75%;
+}
+
+#footer {
+    background-color: #C7EFCF;
+    text-align: center;
+    padding-bottom: 5%;
+    font-size: 20px;
+}
+
+#con {
+    border: double;
+    border-color: red;
+}
+
+    </style>
+
+            <div id="div1">
+                <table>
+                    <tr>
+                        <td class="style2">
+                            <img src="images/Tulips.jpg"
+                                style="width: 431px; height: 232px; margin-bottom: 0px" /></td>
+                        <td class="style1">
+                            <center>
+                                <h1>welcome to website</h1>
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="conn">
+                <nav id="nav">
+                    <ul>
+                        <li><a href="home.aspx">HomePage</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Downloads</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        <div id="con">
+<aside id="side">
+<h1>Info</h1>
+<a href="#"><p>Product Type 1</p></a>
+<a href="#"><p>Product Type 2</p></a>
+<a href="#"><p>Product Type 3</p></a>
+    <a href="#"><asp:ScriptManager ID="ScriptManager1" runat="server">
+</asp:ScriptManager>
+</a>
+<asp:Button ID="Button2" runat="server" CssClass="auto-style1" style="z-index: 1" Text="Button" />
+<asp:Button ID="Button1" runat="server" CssClass="auto-style2" Text="Button" />
+</aside>
+<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+</asp:ContentPlaceHolder>
+</div>
+<div id="div">
+<footer id="footer">
+<h3>copyright @Dharma</h3>
+
+</footer>
+    </div>
+    </form>
+    
+</body>
+</html>
