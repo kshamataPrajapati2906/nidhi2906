@@ -1,0 +1,159 @@
+Slip 16
+
+1)Create a webpage with multiline textbox and two buttons, viz. 
+saveContents and loadContents. On click of saveContents button,
+contents from the textbox should be retained and on click of 
+loadContents button, the previously saved contents should be 
+displayed back on the textbox.
+
+Code
+1)
+Webform.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm22.aspx.cs" Inherits="slip1.WebForm22" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:TextBox ID="TextBox1" runat="server" Height="100px" TextMode="MultiLine" Width="175px"></asp:TextBox>
+        </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="SaveContent" />
+        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="LoadContent" />
+    </form>
+</body>
+</html>
+
+Webform.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace slip1
+{
+    public partial class WebForm22 : System.Web.UI.Page
+    {
+        
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            ViewState["data"] = TextBox1.Text;
+            TextBox1.Text = "";
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            TextBox1.Text = ViewState["data"].ToString();
+        }
+    }
+}
+Op
+
+
+2)Store 3 objects of the furniture class having 3 data members (name, 
+manufacturer, and cost) in 3 session objects. Display a panel to 
+include a listbox displaying the names of all three furniture objects, 
+and a button named “MoreInformation”. On click of the button 
+retrieve the selected object (from listbox) information and display it 
+in a label.
+
+Code .
+
+
+
+Webform.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm23.aspx.cs" Inherits="slip1.WebForm23" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ListBox ID="ListBox1" runat="server" Height="110px" Width="123px"></asp:ListBox>
+        </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Show Info" />
+        <p>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+        </p>
+        <asp:Label ID="Label2" runat="server"></asp:Label>
+    </form>
+</body>
+</html>
+
+Webform.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace slip1
+{
+    public partial class WebForm23 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                Session["s1"] = new furniture("chair1", "xyz", "1000");
+                Session["s2"] = new furniture("chair2", "abc", "2000");
+                Session["s3"] = new furniture("chair3", "pqr", "3000");
+                ListBox1.Items.Add(((furniture)Session["s1"]).name);
+                ListBox1.Items.Add(((furniture)Session["s2"]).name);
+                ListBox1.Items.Add(((furniture)Session["s3"]).name);
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (ListBox1.SelectedIndex != -1)
+            {
+                if (ListBox1.SelectedIndex == 0)
+                {
+                    Label1.Text = ((furniture)Session["s1"]).man;
+                    Label2.Text = ((furniture)Session["s1"]).cost;
+
+                }
+                else if (ListBox1.SelectedIndex == 1)
+                {
+                    Label1.Text = ((furniture)Session["s2"]).man;
+                    Label2.Text = ((furniture)Session["s2"]).cost;
+                }
+                else if (ListBox1.SelectedIndex == 2)
+                {
+                    Label1.Text = ((furniture)Session["s3"]).man;
+                    Label2.Text = ((furniture)Session["s3"]).cost;
+                }
+            }
+        }
+    }
+}
+class furniture
+{
+    public string name;
+    public string man;
+    public string cost;
+    public furniture (string name,string man,string cost)
+    {
+        this.name = name;
+        this.man = man;
+        this.cost = cost;
+
+    }
+}
