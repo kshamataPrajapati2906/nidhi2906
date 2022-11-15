@@ -1,0 +1,150 @@
+Slip 13
+
+
+1)Create a web application to bind data in a multiline textbox by 
+querying in another textbox.
+
+Code
+
+1)
+Webform1.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Unit4.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+        </div>
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <br />
+        <asp:TextBox ID="TextBox2" runat="server" TextMode="MultiLine"></asp:TextBox>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+    </form>
+</body>
+</html>
+
+Webform1.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+
+namespace Unit4
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        SqlConnection cn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True");
+        SqlCommand co = new SqlCommand();
+        SqlDataReader ds;
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            cn.Open();
+            co.Connection=cn;
+        }
+
+        protected void TextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void TextBox2_TextChanged1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            co.CommandText="Select * from demo where Name='"+TextBox1.Text+"';";
+            ds = co.ExecuteReader();
+            while (ds.Read())
+            {
+                TextBox2.Text += ds[0].ToString() + "\t" + ds[1].ToString() + "\t" + ds[2].ToString() + "\n";
+
+            }
+        }
+    }
+}
+
+
+Output
+
+
+2)Write a program to create a DLL to print a factorial of a number.
+
+Code 
+Allmethods.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace slip1
+{
+    public class Allmethods
+    {
+        public string fact(int x)
+        {
+            int d = 1;
+            for(int i = 1; i <= x; i++)
+            {
+                d = d * i;
+            }
+            return d.ToString();
+        }
+    }
+}
+Webform.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm16.aspx.cs" Inherits="slip1.WebForm16" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+    </form>
+</body>
+</html>
+
+Webform.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using slip1;
+namespace slip1
+{
+    public partial class WebForm16 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Allmethods all = new Allmethods();
+            TextBox2.Text=all.fact(Convert.ToInt32(TextBox1.Text));
+
+        }
+    }
+}
+
+Op
