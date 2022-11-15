@@ -1,2 +1,205 @@
+Slip  --- 6
+1)Create a simple web page with various sever controls to demonstrate 
+setting and use of their properties. (Example : AutoPostBack) 
+1. On click of a button control display the selected items from 
+the listbox in a textbox. Also in the same webpage display 
+the name of the selected item from the DropDownList1 in a 
+label. Also change the font size of the same label according 
+to the font size selected from the Dropdownlist2. 
+2. Display Image control for photo. 
+3. Check Boxes provides special formatting (viz. underline, 
+bold, italic) and Radio Buttons provides color for label. 
+4. Use of AutoPostBack property.
 
+Code
+
+<%@ Page Language="C#" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="WebForm3.aspx.cs" Inherits="slip1.WebForm3" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:ListBox ID="ListBox1" runat="server">
+                <asp:ListItem>item1</asp:ListItem>
+                <asp:ListItem>item2</asp:ListItem>
+                <asp:ListItem>item3</asp:ListItem>
+                <asp:ListItem>item4</asp:ListItem>
+                <asp:ListItem>item5</asp:ListItem>
+            </asp:ListBox>
+        </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <p>
+            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                <asp:ListItem>item1</asp:ListItem>
+                <asp:ListItem>item2</asp:ListItem>
+                <asp:ListItem>item3</asp:ListItem>
+                <asp:ListItem>item4</asp:ListItem>
+                <asp:ListItem>item5</asp:ListItem>
+            </asp:DropDownList>
+        </p>
+        <p>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+        </p>
+        <p>
+            <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged">
+                 <asp:ListItem>10</asp:ListItem>
+                 <asp:ListItem>11</asp:ListItem>
+                 <asp:ListItem>12</asp:ListItem>
+                 <asp:ListItem>13</asp:ListItem>
+                 <asp:ListItem>20</asp:ListItem>
+            </asp:DropDownList>
+        </p>
+        <p>
+            <asp:Image ID="Image1" runat="server" Height="250px" ImageUrl="~/Shinchan.jpg" Width="200px" />
+        </p>
+        <br />
+        <p>
+            <asp:Label ID="Label2" runat="server" Text="Hello"></asp:Label>
+        </p>
+        <p>
+            <asp:CheckBox ID="Underline" runat="server" AutoPostBack="True" OnCheckedChanged="Underline_CheckedChanged" Text="Underline" />
+            <asp:CheckBox ID="Bold" runat="server" AutoPostBack="True" OnCheckedChanged="Bold_CheckedChanged" Text="Bold"/>
+            <asp:CheckBox ID="Italic" runat="server" AutoPostBack="True" OnCheckedChanged="Italic_CheckedChanged" Text="Italic"/>
+        </p>
+        <p>
+            <asp:RadioButton ID="Red" runat="server" Text="Red" AutoPostBack="True" OnCheckedChanged="Red_CheckedChanged" />
+            <asp:RadioButton ID="Green" runat="server" Text="Green" AutoPostBack="True" GroupName="color" OnCheckedChanged="Green_CheckedChanged"/>
+        </p>
+    </form>
+</body>
+</html>
+
+Aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace slip1
+{
+    public partial class WebForm3 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            TextBox1.Text = ListBox1.SelectedValue.ToString();
+
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Label1.Text = DropDownList1.SelectedValue.ToString();
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Label1.Font.Size = Convert.ToInt32(DropDownList2.SelectedValue);
+        }
+
+        protected void Underline_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Underline.Checked)
+            {
+                Label2.Font.Underline = true;
+            }
+            else
+            {
+                Label2.Font.Underline = false;
+            }
+        }
+
+        protected void Bold_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Bold.Checked)
+            {
+                Label2.Font.Bold = true;
+            }
+            else
+            {
+                Label2.Font.Bold = false;
+            }
+        }
+
+        protected void Italic_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Italic.Checked)
+            {
+                Label2.Font.Italic = true;
+            }
+            else
+            {
+                Label2.Font.Italic = false;
+            }
+        }
+
+        protected void Red_CheckedChanged(object sender, EventArgs e)
+        {
+            Label2.ForeColor = System.Drawing.Color.Red;
+        }
+
+        protected void Green_CheckedChanged(object sender, EventArgs e)
+        {
+            Label2.ForeColor = System.Drawing.Color.Green;
+        }
+    }
+}
+
+2)Create a simple web page to count the number of times the current 
+webpage is submitted to the server onclick event of a Button.
+
+Code
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm4.aspx.cs" Inherits="slip1.WebForm4" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Label ID="Label1" runat="server"></asp:Label>
+        </div>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+    </form>
+</body>
+</html>
+.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace slip1
+{
+    public partial class WebForm4 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            ViewState["x"] = Convert.ToInt32(ViewState["x"]) + 1;
+            Label1.Text = ViewState["x"].ToString();
+        }
+    }
+}
+Op
 1
