@@ -1,1 +1,143 @@
 
+Slip 9 
+
+1). 
+  Create a simple web page to display the Date properties (year, 
+month, day, hour, minute, second, millisecond etc.) as well as to 
+display the number of days of the year between two specified years.
+
+
+Code
+
+1)
+Webform.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm9.aspx.cs" Inherits="slip1.WebForm9" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+        </div>
+    </form>
+</body>
+</html>
+
+Webform.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace slip1
+{
+    public partial class WebForm9 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            DateTime date = DateTime.Now;
+            Response.Write(date + "<br>");
+            Response.Write(date.Second + "<br>");
+            Response.Write(date.Minute + "<br>");
+            Response.Write(date.Hour + "<br>");
+            Response.Write(date.Millisecond + "<br>");
+            Response.Write(date.Day + "<br>");
+            Response.Write(date.Month + "<br>");
+            Response.Write(date.Year + "<br>");
+            DateTime dt1 = new DateTime(2021, 10, 04);
+            DateTime dt2 = new DateTime(2020, 10, 04);
+            TimeSpan ts = dt1 - dt2;
+            Response.Write(ts.TotalDays / 365);
+
+        }
+    }
+}
+Op
+
+2) Create a web page containing the student details (RollNo, Name, 
+Class, Phone, Email) and show result using Databinding and 
+dropdownlist control.
+
+Code
+
+
+Webform.aspx
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm10.aspx.cs" Inherits="slip1.WebForm10" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <asp:GridView ID="GridView1" runat="server">
+            </asp:GridView>
+        </div>
+        <asp:DropDownList ID="DropDownList1" runat="server">
+        </asp:DropDownList>
+    </form>
+</body>
+</html>
+
+Webform.aspx.cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+namespace slip1
+{
+    public partial class WebForm10 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            DataSet std = new DataSet();
+            std.Tables.Add(new DataTable("students"));
+            std.Tables["students"].Columns.Add(new DataColumn("rollno"));
+            std.Tables["students"].Columns.Add(new DataColumn("name"));
+            std.Tables["students"].Columns.Add(new DataColumn("class"));
+            std.Tables["students"].Columns.Add(new DataColumn("phone"));
+            std.Tables["students"].Columns.Add(new DataColumn("email"));
+
+            DataRow dr = std.Tables["students"].NewRow();
+            dr["rollno"] = "1";
+            dr[1] = "sam";
+            dr[2] = "IT";
+            dr[3] = "123456789";
+            dr[4] = "sam@sam.com";
+            std.Tables["students"].Rows.Add(dr);
+            dr = std.Tables["students"].NewRow();
+            dr["rollno"] = "2";
+            dr[1] = "tam";
+            dr[2] = "IT";
+            dr[3] = "123456789";
+            dr[4] = "sam@sam.com";
+            std.Tables["students"].Rows.Add(dr);
+
+            GridView1.DataSource = std.Tables["students"];
+            GridView1.DataBind();
+            DropDownList1.DataSource= std.Tables["students"];
+            DropDownList1.DataTextField = "name";
+            DropDownList1.DataValueField = "rollno";
+            DropDownList1.DataBind();
+        }
+    }
+}
+Op
